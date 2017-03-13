@@ -24,6 +24,10 @@ body > .container-fluid > .row {
     background-color: blue;
 }
 
+#socialmedia #facebook .omb_btn-facebook {
+    background: #3b5998;
+}
+
 #twitter {
     background-color: white;
 }

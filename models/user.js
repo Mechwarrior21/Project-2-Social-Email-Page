@@ -9,22 +9,17 @@ var userSchema = mongoose.Schema({
 		accessToken: String,
 		refreshToken: String,
 		id: String,
+        profileUrl: String,
 		profile: mongoose.Schema.Types.Mixed
 	},
 
-	twitter: {
+/*	twitter: {
 		token: String,
 		tokenSecret: String,
 		id: String,
 		profile: mongoose.Schema.Types.Mixed
-	},
+	},*/
 		
-	github: {
-	 	accessToken: String,
-	 	refreshToken: String,
-	 	id: String,
-	 	profile: mongoose.Schema.Types.Mixed
-	}
 },{
 	timestamps: true
 });

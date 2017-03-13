@@ -1,9 +1,20 @@
-var express = require('express');
-var router = express.Router();
+module.exports = function(app, passport){
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+	app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
+    
+	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+		successRedirect: '/secret',
+		failureRedirect: '/error'
 
-module.exports = router;
+	}));
+	
+	/*app.get('/auth/twitter', passport.authenticate('twitter')); 
+
+	app.get('./auth/twitter/callback', passport.authenticate('twitter', {
+		successRedirect:'/secret',
+		failureRedirect:'/error'
+
+	}));*/
+
+
+} 

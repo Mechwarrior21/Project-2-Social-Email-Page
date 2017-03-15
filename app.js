@@ -37,7 +37,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Setup local strategy
-require('./passport/twitter')(passport);
+//require('./passport/twitter')(passport);
 require('./passport/google')(passport);
 
 // Setup routes

@@ -5,20 +5,19 @@ var userSchema = mongoose.Schema({
 	email 		: {type: String, unique: true, required: true},
 	password 	: {type: String},
 
-	facebook: {
-		accessToken: String,
-		refreshToken: String,
-		id: String,
-        profileUrl: String,
-		profile: mongoose.Schema.Types.Mixed
-	},
-
-/*	twitter: {
+	twitter: {
 		token: String,
 		tokenSecret: String,
 		id: String,
 		profile: mongoose.Schema.Types.Mixed
-	},*/
+	},
+    
+    google: {
+		token: String,
+		tokenSecret: String,
+		id: String,
+		profile: mongoose.Schema.Types.Mixed
+    },
 		
 },{
 	timestamps: true

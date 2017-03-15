@@ -3,31 +3,29 @@ extends layout
 block content
     .row
         #socialmedia.col-md-8.noPadding
-            #facebook.col-md-4.noPadding
+            #twitter.col-md-6.noPadding
                 script.
-                  (function(d, s, id) {
-                  var js, fjs = d.getElementsByTagName(s)[0];
-                  if (d.getElementById(id)) return;
-                  js = d.createElement(s); js.id = id;
-                  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1461298100561355";
-                  fjs.parentNode.insertBefore(js, fjs);
-                  }(document, 'script', 'facebook-jssdk'));
-
-                .fb-page(data-href='https://www.facebook.com/facebook', 
-                        data-tabs='timeline', 
-                        data-small-header='true', 
-                        data-adapt-container-width='true', 
-                        data-hide-cover='true', 
-                        data-show-facepile='false')
-                    blockquote.fb-xfbml-parse-ignore(cite='https://www.facebook.com/facebook')
-                        a(href='https://www.facebook.com/facebook') Facebook
-               
-                .col-xs-4.col-sm-2
-                    a.btn.btn-lg.btn-block.omb_btn-facebook(href='/auth/facebook')
-                        i.fa.fa-facebook.visible-xs
-                        span.hidden-xs Facebook
-            #twitter.col-md-4.noPadding
-            #instagram.col-md-4.noPadding
+                    window.twttr = (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0],
+                        t = window.twttr || {};
+                        if (d.getElementById(id)) return t;
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                        t._e = [];
+                        t.ready = function(f) {
+                        t._e.push(f);
+                        };
+                        return t;
+                        }(document, "script", "twitter-wjs"));
+                        
+                a.twitter-timeline(href='https://twitter.com/TwitterDev', 
+                    data-chrome='nofooter noborders',
+                    data-height='100%',
+                    data-width='100%')
+                    
+            #instagram.col-md-6.noPadding
         #emails.col-md-4.noPadding
             .row#gmail
                 .col-md-12.noPadding

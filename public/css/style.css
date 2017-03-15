@@ -16,16 +16,12 @@ body > .container-fluid > .row {
     height: 100%;
 }
 
-.col-md-4 {
+.col-md-6 {
     height: 100%;
 }
 
-#facebook {
-    background-color: blue;
-}
-
-#socialmedia #facebook .omb_btn-facebook {
-    background: #3b5998;
+.col-md-4 {
+    height: 100%;
 }
 
 #twitter {

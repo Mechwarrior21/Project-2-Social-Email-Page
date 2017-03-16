@@ -1,7 +1,7 @@
 var twitterStrategy = require('passport-twitter').Strategy;
 
-var appid = '';
-var appSecret = '';
+var appid = '2XqnFyoPyYhrVqPtcOt7JYwpw';
+var appSecret = 'npg243Jr9Bo28w6z0KYLFArxkKzifdVzwzlfDRLTNFmOlLeZQ8';
 var callback = 'http://localhost:3000/auth/twitter/callback';
 
 var User = require('../models/user');
@@ -12,13 +12,11 @@ module.exports = function (passport) {
 	    consumerKey: appid,
 	    consumerSecret: appSecret,
 	    callbackURL: callback,
-        profileFields: ['id', 'emails', 'username', 'link']
-
+        includeEmail: true,
+        profileFields: ['id', 'emails', 'displayName']
 	},
 
     function(token, tokenSecret, profile, done){
-      
-        console.log("twitterProfile", profile);
         
         process.nextTick(function(){
             
@@ -40,7 +38,7 @@ module.exports = function (passport) {
                 } else {
                     console.log("twitterStrategy: unknown user - create new user");
                     
-                    var User = new User();
+                    var user = new User();
                     user.email = email;
                     user.pasword = "";
                     user.twitter.accessToken = token;

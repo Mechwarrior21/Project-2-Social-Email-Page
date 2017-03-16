@@ -11,3 +11,5 @@ var Gmail = require('node-gmail-api')
 s.on('data', function (d) {
   console.log(d.snippet)
 })
+
+module.exports = router;

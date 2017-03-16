@@ -12,10 +12,6 @@ var users = require('./routes/users');
 
 var app = express();
 
-// Connect with MongoDB
-//var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost/social-email')
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -31,13 +27,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
+// Connect with MongoDB
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/social-email')
+
+// Import controllers
+//var googleController = require('./controller/googleController');
+
 // Setup sessions
 app.use(session({ secret: 'hongkong'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Setup local strategy
-//require('./passport/twitter')(passport);
+require('./passport/twitter')(passport);
 require('./passport/google')(passport);
 
 // Setup routes

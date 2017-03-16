@@ -11,16 +11,72 @@ module.exports = function (passport) {
     passport.use("google", new GoogleStrategy({
         clientID: appid,
         clientSecret: appSecret,
-	    callbackURL: callback
+	    callbackURL: callback,
+        profileFields: ['id', 'displayName', 'emails']
     },
 
-    function(token, tokenSecret, profile, done) {
+    function(token, tokenSecret, profile, done){
         
-        console.log("googleProfile", profile);
-        
-        User.findOrCreate({ googleId: profile.id }, function (err, user) {
-            return done(err, user);
+        process.nextTick(function(){
+            
+            var email = profile.emails[0].value
+            
+            User.findOne({'email' : email}, function(err, user){
+                
+                if(user){
+                    console.log("googleStrategy: local user found - merging data");
+                    
+                    user.google.accessToken = token;
+                    user.google.refreshToken = tokenSecret;
+                    user.google.id = profile.id;
+                    user.google.profile = profile;
+                    
+                    console.log("accessToken", token)
+                    
+                    user.save(function(err, user){
+                        if(err){
+                            return done(err,false);
+                        }
+                        return done(null,user);
+                    });
+                } else {
+                    console.log("googleStrategy: unknown user - create new user");
+                    
+                    var user = new User();
+                    user.email = email;
+                    user.password = "";
+                    user.google.accessToken = token;
+                    user.google.refreshToken = "";
+                    user.google.id = profile.id;
+                    user.google.profile = profile;
+                    
+                    console.log("tokens", token);
+                    console.log("user", user);
+                    
+                    
+                    
+                    user.save(function(err, user){
+                        if(err){
+                            return done(err,false);
+                        }
+                        
+                       // console.log(user);
+                        
+                        return done(null,user);
+                    });
+                }  
+                passport.serializeUser(function(user, done){
+                    done(null, user.id);
+                    console.log("User Serialized");
+                });
+
+                passport.deserializeUser(function(id, done){
+                    User.findById(id, function(err, done){
+                        done(err, user);
+                        console.log("User Serialized");
+                    });
+                });
+            });
         });
-        }            
-    ));
+    }));
 }

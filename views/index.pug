@@ -19,15 +19,15 @@ block content
                         };
                         return t;
                         }(document, "script", "twitter-wjs"));
-                        
-                a.twitter-timeline(href='https://twitter.com/TwitterDev', 
-                    data-chrome='nofooter noborders',
-                    data-height='100%',
-                    data-width='100%')
+       
+                .login.button.btn.btn-default(type='submit')
+                    a(href='auth/twitter') Login to Twitter
                     
             #instagram.col-md-6.noPadding
         #emails.col-md-4.noPadding
             .row#gmail
                 .col-md-12.noPadding
+                    .login.button.btn.btn-default(type='submit')
+                        a(href='auth/google') Login to Gmail
             .row#outlook
                 .col-md-12.noPadding

@@ -4,24 +4,13 @@ block content
     .row
         #socialmedia.col-md-8.noPadding
             #twitter.col-md-6.noPadding
-                script.
-                    window.twttr = (function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0],
-                        t = window.twttr || {};
-                        if (d.getElementById(id)) return t;
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = "https://platform.twitter.com/widgets.js";
-                        fjs.parentNode.insertBefore(js, fjs);
-                        t._e = [];
-                        t.ready = function(f) {
-                        t._e.push(f);
-                        };
-                        return t;
-                        }(document, "script", "twitter-wjs"));
+                ul#feed
+                    li Twitter Feed
        
                 .login.button.btn.btn-default(type='submit')
-                    a(href='auth/twitter') Login to Twitter
+                    a(href='http://127.0.0.1:3000/auth/twitter') Login to Twitter
+                #refreshTwitter.button.btn.btn-default(type='submit')
+                    a(href='http://127.0.0.1:3000/') Refresh
                     
             #instagram.col-md-6.noPadding
         #emails.col-md-4.noPadding

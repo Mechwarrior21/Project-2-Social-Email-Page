@@ -31,7 +31,7 @@ module.exports = function (passport) {
                     user.google.id = profile.id;
                     user.google.profile = profile;
                     
-                    console.log("accessToken", token)
+                    console.log("accesstoken", token)
                     
                     user.save(function(err, user){
                         if(err){
@@ -39,6 +39,7 @@ module.exports = function (passport) {
                         }
                         return done(null,user);
                     });
+                    
                 } else {
                     console.log("googleStrategy: unknown user - create new user");
                     
@@ -50,30 +51,24 @@ module.exports = function (passport) {
                     user.google.id = profile.id;
                     user.google.profile = profile;
                     
-                    console.log("tokens", token);
-                    console.log("user", user);
-                    
-                    
-                    
                     user.save(function(err, user){
                         if(err){
                             return done(err,false);
                         }
-                        
-                       // console.log(user);
-                        
+
                         return done(null,user);
                     });
-                }  
+                }
+                
                 passport.serializeUser(function(user, done){
                     done(null, user.id);
-                    console.log("User Serialized");
+                    console.log("User serialized");
                 });
 
                 passport.deserializeUser(function(id, done){
                     User.findById(id, function(err, done){
                         done(err, user);
-                        console.log("User Serialized");
+                        console.log("User deserialized");
                     });
                 });
             });

@@ -49,7 +49,7 @@ module.exports = function (passport) {
                     user.save(function(err, user){
                         return done(null,false);
                     });
-                }  
+                } 
             });
         });
     }));

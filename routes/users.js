@@ -1,6 +1,8 @@
+const User = require('../models/user');
+
 module.exports = function(app, passport){
 
-	app.get('/auth/twitter', passport.authenticate('twitter', { scope: 'email'})); 
+	app.get('http://127.0.0.1:3000/auth/twitter', passport.authenticate('twitter', { scope: 'email'})); 
 
 	app.get('/auth/twitter/callback', passport.authenticate('twitter', {
 		successRedirect:'/',
@@ -8,7 +10,7 @@ module.exports = function(app, passport){
 
 	}));
 
-    app.get('/auth/google', passport.authenticate('google', { scope: 'email'})); 
+    app.get('/auth/google', passport.authenticate('google', { scope: ['http://mail.google.com', 'https://www.googleapis.com/auth/gmail.readonly'] })); 
 
 	app.get('/auth/google/callback', passport.authenticate('google', {
 		successRedirect:'/',
@@ -30,20 +32,3 @@ module.exports = function(app, passport){
     }*/
     
 } 
-
-/*
-var Twitter = require('twitter');
- 
-var client = new Twitter({
-  consumer_key: '2XqnFyoPyYhrVqPtcOt7JYwpw',
-  consumer_secret: 'npg243Jr9Bo28w6z0KYLFArxkKzifdVzwzlfDRLTNFmOlLeZQ8',
-  access_token_key: '191817530-82NKJjh2NxqPpr75ke7nV4tL4IoBF1dai7LBGFkS',
-  access_token_secret: 'gxFzcNjnlJDhXVZvuXsvHb1UrSqFLOU2hzz1srlZhC1b3'
-});
- 
-var params = {screen_name: 'nodejs'};
-client.get('statuses/user_timeline', params, function(error, tweets, response) {
-  if (!error) {
-    console.log(tweets);
-  }
-});*/

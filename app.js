@@ -33,9 +33,14 @@ mongoose.connect('mongodb://localhost/social-email')
 
 // Import controllers
 //var googleController = require('./controller/googleController');
+//var twitterController = require('./controller/twitterController');
 
 // Setup sessions
-app.use(session({ secret: 'hongkong'}));
+app.use(session({ 
+                    secret            : 'hongkong',
+                    resave            : false,
+                    saveUninitialized : false
+                }));
 app.use(passport.initialize());
 app.use(passport.session());
 

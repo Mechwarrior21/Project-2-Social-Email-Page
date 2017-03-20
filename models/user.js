@@ -6,15 +6,15 @@ var userSchema = mongoose.Schema({
 	password 	: {type: String},
 
 	twitter: {
-		token: String,
-		tokenSecret: String,
+		accessToken: String,
+		refreshToken: String,
 		id: String,
 		profile: mongoose.Schema.Types.Mixed
 	},
     
     google: {
-		token: String,
-		tokenSecret: String,
+		accessToken: String,
+		refreshToken: String,
 		id: String,
 		profile: mongoose.Schema.Types.Mixed
     },

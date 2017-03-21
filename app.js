@@ -33,7 +33,7 @@ mongoose.connect('mongodb://localhost/social-email')
 
 // Import controllers
 //var googleController = require('./controller/googleController');
-//var twitterController = require('./controller/twitterController');
+var twitterController = require('./controller/twitterController');
 
 // Setup sessions
 app.use(session({ 

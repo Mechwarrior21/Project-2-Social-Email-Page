@@ -8,6 +8,18 @@ var User = require('../models/user');
 
 module.exports = function (passport) {
     
+    passport.serializeUser(function(user, done){
+        done(null, user.google.id);
+        console.log("User serialized");
+    });
+
+    passport.deserializeUser(function(id, done){
+        User.findById(id, function(err, done){
+            done(err, User)
+            console.log("User deserialized");
+        });
+    });
+    
     passport.use("google", new GoogleStrategy({
         clientID: appid,
         clientSecret: appSecret,
@@ -60,16 +72,14 @@ module.exports = function (passport) {
                     });
                 }
                 
-                passport.serializeUser(function(user, done){
-                    done(null, user.id);
-                    console.log("User serialized");
-                });
+                // Fetch latest 10 emails and show the snippet
 
-                passport.deserializeUser(function(id, done){
-                    User.findById(id, function(err, done){
-                        done(err, user);
-                        console.log("User deserialized");
-                    });
+                var Gmail = require('node-gmail-api')
+                var gmail = new Gmail(token)
+                var s = gmail.messages('label:inbox', {max: 10})
+
+                s.on('data', function (d) {
+                    console.log(d.snippet)
                 });
             });
         });

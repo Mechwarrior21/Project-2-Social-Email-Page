@@ -9,7 +9,7 @@ var Gmail = require('node-gmail-api')
   , s = gmail.messages('label:inbox', {max: 10})
 
 s.on('data', function (d) {
-  console.log(d.snippet)
+  console.log(d.snippet);
 })
 
 module.exports = router;
